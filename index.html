@@ -23,7 +23,11 @@
 
     body {
       font-family: 'JetBrains Mono', monospace;
-      background: radial-gradient(circle at top, #0b122e, #05080f 70%);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,255,156,0.18), transparent 35%),
+        radial-gradient(circle at 80% 30%, rgba(0,200,255,0.18), transparent 35%),
+        radial-gradient(circle at 50% 80%, rgba(0,229,255,0.12), transparent 40%),
+        linear-gradient(180deg, #060b1f, #05080f 70%);
       color: var(--text);
       scroll-behavior: smooth;
       overflow-x: hidden;
@@ -181,11 +185,13 @@
     }
 
     .card {
-      background: var(--card);
+      background: linear-gradient(160deg, rgba(20,28,60,0.85), rgba(8,12,30,0.95));
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0,200,255,0.25);
       border-radius: 18px;
       padding: 2rem;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-      transition: transform .4s ease;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      transition: transform .4s ease, box-shadow .4s ease;
     }
 
     .card:hover { transform: translateY(-10px); }
@@ -206,9 +212,108 @@
       .arrow { transform: rotate(90deg); }
       .hero-name { font-size: 2.2rem; }
     }
-  </style>
+  /* ---------------- ADVANCED DEVOPS VISUALS ---------------- */
+
+/* Floating infra background */
+.infra-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(0,255,156,.18), transparent 45%),
+    radial-gradient(circle at 85% 35%, rgba(0,200,255,.18), transparent 45%),
+    radial-gradient(circle at 50% 75%, rgba(0,229,255,.14), transparent 50%);
+  filter: blur(0.5px);
+  animation: infraMove 18s linear infinite;
+}
+
+@keyframes infraMove {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 400px 200px, -400px -200px; }
+}
+
+/* GitOps loop animation */
+.gitops {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.git-node {
+  padding: 1.2rem 1.4rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0e1324, #1a2359);
+  border: 1px solid var(--green);
+  animation: rotateNode 8s linear infinite;
+}
+
+@keyframes rotateNode {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Code block animation */
+.code-block {
+  background: #02040a;
+  border-left: 4px solid var(--green);
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-size: .85rem;
+  color: var(--green);
+  animation: glow 3s infinite;
+}
+
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 0 rgba(0,255,156,.2); }
+  50% { box-shadow: 0 0 30px rgba(0,255,156,.5); }
+}
+
+
+/* ---------- PREMIUM TECH ICON LAYER ---------- */
+.tech-icons {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.tech-icons img {
+  position: absolute;
+  width: 72px;
+  opacity: 0.18;
+  filter: drop-shadow(0 0 18px rgba(0,200,255,.55));
+  animation: float 22s linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); }
+  50% { transform: translateY(-120px) translateX(60px) rotate(180deg); }
+  100% { transform: translateY(0) translateX(0) rotate(360deg); }
+}
+</style>
 </head>
 <body>
+<div class="tech-icons">
+  <!-- Core DevOps -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" style="top:10%;left:5%" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" style="top:70%;left:10%" />
+
+  <!-- Cloud Providers -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" style="top:18%;right:8%" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" style="bottom:15%;right:12%" />
+
+  <!-- Git / GitOps -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" style="top:45%;left:2%" />
+  <img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/argocd/icon/color/argocd-icon-color.svg" style="top:55%;right:3%" />
+
+  <!-- IaC & CI/CD -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" style="bottom:25%;left:8%" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" style="top:30%;right:20%" />
+
+  <!-- Platform / Load Balancer Concept -->
+  <img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/kubernetes/icon/color/kubernetes-icon-color.svg" style="bottom:5%;left:45%" />
+</div>
+<div class="infra-bg"></div>
 
 <!-- HERO / PIPELINE INIT -->
 <header>
@@ -267,12 +372,35 @@
 
 <!-- SKILLS -->
 <section>
+  <h2>Stage 3.5: Developer + DevOps Fusion</h2>
+  <div class="grid">
+    <div class="card"><h3>🧠 System Design</h3><p>Designed scalable cloud-native architectures, DR topology, blue-green & canary deployments.</p></div>
+    <div class="card"><h3>💻 Developer Mindset</h3><p>Python automation, Bash scripting, API integration, CI test stages.</p></div>
+    <div class="card"><h3>🔐 Security & Reliability</h3><p>IAM hardening, secrets management, SRE SLIs/SLOs, zero-downtime releases.</p></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section>
   <h2>Stage 3: Runtime Environment</h2>
   <div class="grid">
     <div class="card"><h3>☁️ Cloud</h3><p>AWS, GCP, VPC, IAM, Cloud Storage, EC2, GKE, EKS</p></div>
     <div class="card"><h3>🐳 Containers</h3><p>Docker, Kubernetes, Helm, GitHub Container Registry</p></div>
     <div class="card"><h3>🔧 Automation</h3><p>Terraform, Jenkins, GitHub Actions, Ansible</p></div>
     <div class="card"><h3>📊 Monitoring</h3><p>Prometheus, Grafana, ELK, AIOps</p></div>
+  </div>
+</section>
+
+<!-- GITOPS LOOP -->
+<section>
+  <h2>Stage 4: GitOps & Continuous Delivery</h2>
+  <div class="gitops">
+    <div class="git-node">Git</div>
+    <div class="git-node">CI</div>
+    <div class="git-node">Docker</div>
+    <div class="git-node">Helm</div>
+    <div class="git-node">K8s</div>
+    <div class="git-node">Monitor</div>
   </div>
 </section>
 
@@ -286,13 +414,131 @@
   </div>
 </section>
 
+<!-- LIVE PIPELINE CODE -->
+<section>
+  <h2>Live Deployment Manifest</h2>
+  <div class="code-block">
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: nishant-portfolio
+    spec:
+      replicas: 3
+      strategy:
+        type: RollingUpdate
+      template:
+        spec:
+          containers:
+          - name: portfolio
+            image: ghcr.io/nishant/portfolio:latest
+            ports:
+            - containerPort: 80
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section>
+  <h2>Production Cloud Architecture (AWS / GCP)</h2>
+  <div class="card" style="text-align:center">
+    <p style="margin-bottom:1rem">VPC → Load Balancer → Kubernetes → Observability</p>
+    <svg width="100%" height="220" viewBox="0 0 800 220">
+      <g fill="none" stroke="#00c8ff" stroke-width="2" stroke-dasharray="6 6">
+        <line x1="80" y1="110" x2="220" y2="110" />
+        <line x1="300" y1="110" x2="440" y2="110" />
+        <line x1="520" y1="110" x2="660" y2="110" />
+      </g>
+      <g fill="#0e1324" stroke="#00ff9c" stroke-width="2">
+        <rect x="20" y="70" rx="14" ry="14" width="120" height="80" />
+        <rect x="200" y="70" rx="14" ry="14" width="120" height="80" />
+        <rect x="380" y="70" rx="14" ry="14" width="120" height="80" />
+        <rect x="560" y="70" rx="14" ry="14" width="180" height="80" />
+      </g>
+      <g fill="#00e5ff" font-size="14" text-anchor="middle">
+        <text x="80" y="115">VPC</text>
+        <text x="260" y="115">Load Balancer</text>
+        <text x="440" y="115">Kubernetes</text>
+        <text x="650" y="115">Monitoring</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- CI/CD -->
+<section>
+  <h2>GitHub Actions CI Pipeline</h2>
+  <div class="code-block">
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Docker Image
+      run: docker build -t portfolio .
+    - name: Push Image
+      run: echo "pushed to registry"
+  </div>
+</section>
+
+<!-- DOCKER & HELM -->
+<section>
+  <h2>Docker & Helm Packaging</h2>
+  <div class="grid">
+    <div class="code-block">FROM nginx:alpine
+COPY index.html /usr/share/nginx/html
+</div>
+    <div class="code-block">helm install portfolio ./chart
+replicas: 3
+service: LoadBalancer
+</div>
+  </div>
+</section>
+
+<!-- ARGOCD -->
+<section>
+  <h2>ArgoCD GitOps Deployment</h2>
+  <div class="code-block">
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: portfolio
+spec:
+  source:
+    repoURL: https://github.com/nishant/portfolio
+    path: helm
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+  </div>
+</section>
+
+<!-- SRE DASHBOARD -->
+<section>
+  <h2>SRE Dashboard (SLI / SLO)</h2>
+  <div class="grid">
+    <div class="card"><h3>Availability</h3><p>99.95%</p></div>
+    <div class="card"><h3>Latency</h3><p>P95 &lt; 200ms</p></div>
+    <div class="card"><h3>Error Budget</h3><p>87% Remaining</p></div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section>
   <h2>Stage 7: Deploy to Production</h2>
   <div class="grid">
-    <div class="card"><h3>Email</h3><p>tnishant77555@gmail.com</p></div>
-    <div class="card"><h3>LinkedIn</h3><p>linkedin.com/in/nishant-tiwari-a139541a1</p></div>
-    <div class="card"><h3>Phone</h3><p>+91 7887077555</p></div>
+    <div class="card">
+      <h3>Email</h3>
+      <p><a href="mailto:tnishant77555@gmail.com" style="color: var(--cyan); text-decoration:none;">tnishant77555@gmail.com</a></p>
+    </div>
+    <div class="card">
+      <h3>LinkedIn</h3>
+      <p><a href="https://www.linkedin.com/in/nishant-tiwari-a139541a1" target="_blank" rel="noopener" style="color: var(--cyan); text-decoration:none;">linkedin.com/in/nishant-tiwari-a139541a1</a></p>
+    </div>
+    <div class="card">
+      <h3>Phone</h3>
+      <p><a href="tel:+917887077555" style="color: var(--cyan); text-decoration:none;">+91 7887077555</a></p>
+    </div>
   </div>
 </section>
 
